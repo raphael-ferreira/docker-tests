@@ -1,0 +1,21 @@
+version: '3'
+volumes:
+  dados:
+services:
+  db:
+    image: postgres:9.6
+    volumes:
+      # Volume dos dados
+      - dados:/var/lib/postgresql/data
+      # Scripts
+      - ./scripts:/scripts
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+# docker commands log:
+#    cd email-worker-compose
+#    docker-compose up -d
+#    docker-compose ps
+#    docker-compose exec db psql -U postgres -c '\l'
+#    docker-compose down
+#    docker-compose up -d
+#    docker-compose exec db psql -U postgres -f /scripts/check.sql
